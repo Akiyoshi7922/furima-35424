@@ -14,22 +14,21 @@
 | year              | date   | null: false               |
 
 Association
-- has_many :buys, through: users_buys
+- has_many :users_items
 
-users_buysテーブル
+users_itemsテーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | user          | references | null: false, foreign_key: true |
-| buy           | references | null: false, foreign_key: true |
-
+| item          | references | null: false, foreign_key: true |
 
 Association
 
 - belongs_to :buy
-- has_one :address
+- has_one :addresses
 
- buys テーブル
+ itemsテーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
@@ -44,22 +43,21 @@ Association
 | user               | references | null: false, foreign_key: true |
 
 Association
+belongs_to :users_item
 
-- belongs_to : user, through: users_buys
+addressesテーブル
 
- address テーブル
-
-| Column             | Type    | Options     |
-| ------------------ | ------- | ----------- |
-| postalcode         | string  | null: false |
-| city_id            | integer | null: false |
-| city               | string  | null: false |
-| address            | string  | null: false |
-| buildingname       | string  |             |
-| phonenumber        | string  | null: false |
+| Column             | Type       | Options                           |
+| ------------------ | ---------- | --------------------------------- |
+| postalcode         | string     | null: false                       |
+| city_id            | integer    | null: false                       |
+| city               | string     | null: false                       |
+| address            | string     | null: false                       |
+| buildingname       | string     |                                   |
+| phonenumber        | string     | null: false                       |
+| items              | references | null: false, foreign_key: true    |
 
 Association
 
-belongs_to :buys
-belongs_to :users_buys
+belongs_to :users_item
 
