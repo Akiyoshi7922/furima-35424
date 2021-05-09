@@ -14,24 +14,24 @@
 | year          | date   | null: false               |
 
 Association
-- has_many :users_bys
-- has_many :bys, through: users_by
+- has_many :users_buys
+- has_many :buys, through: users_buys
 - has_many :address
 
-users_bysテーブル
+users_buysテーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | user          | references | null: false, foreign_key: true |
-| by            | references | null: false, foreign_key: true |
+| buy           | references | null: false, foreign_key: true |
 
 
 Association
 
-- belongs_to :bys
+- belongs_to :buys
 - belongs_to :users
 
- bys テーブル
+ buys テーブル
 
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
@@ -40,25 +40,21 @@ Association
 | category           | text    | null: false |
 | productstatus      | text    | null: false |
 | shipping           | text    | null: false |
-| shippingarea       | text    | null: false |
 | shippingday        | text    | null: false |
 | price_id           | integer | null: false |
 
 Association
 
-- has_many :users_bys
-- has_many :bys, through: users_bys
+- has_many :users_buys
+- has_many :buys, through: users_buys
 - has_many :address
 
  address テーブル
 
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
-| kard               | integer | null: false |
-| expirationdate     | date    | null: false |
-| security           | integer | null: false |
 | postalcode         | stiring | null: false |
-| prefectures        | stiring | null: false |
+| prefectures_id     | integer | null: false |
 | city               | stiring | null: false |
 | address            | stiring | null: false |
 | buildingname       | stiring | null: false |
@@ -67,5 +63,5 @@ Association
 Association
 
 belongs_to :users
-belongs_to :bys
+belongs_to :buys
 
