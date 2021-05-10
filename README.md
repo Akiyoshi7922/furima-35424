@@ -2,21 +2,22 @@
 
   users テーブル
 
-| Column            | Type   | Options                   |
-| ----------------- | ------ | ------------------------- |
-| nickname          | string | null: false               |
-| email             | string | null: false, unique: true |
-| encryptedpassword | string | null: false               |
-| lastname          | string | null: false               |
-| firstname         | string | null: false               |
-| lastnamekana      | string | null: false               |
-| firstnamekana     | string | null: false               |
-| year              | date   | null: false               |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nick_name          | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birthday           | date   | null: false               |
 
 Association
-- has_many :users_items
+- has_many :items
+- has_many :orders
 
-users_itemsテーブル
+ordersテーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
@@ -24,40 +25,42 @@ users_itemsテーブル
 | item          | references | null: false, foreign_key: true |
 
 Association
-
-- belongs_to :buy
 - has_one :addresses
+- belongs_to :user
+- belongs_to :item
+
 
  itemsテーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| productctname      | string     | null: false                    |
-| productdescription | text       | null: false                    |
-| category_id        | integer    | null: false                    |
-| productstatus_id   | integer    | null: false                    |
-| shipping_id        | integer    | null: false                    |
-| city_id            | integer    | null: false                    |
-| shippingday_id     | integer    | null: false                    |
-| price              | integer    | null: false                    |
-| user               | references | null: false, foreign_key: true |
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| product_name        | string     | null: false                    |
+| product_description | text       | null: false                    |
+| category_id         | integer    | null: false                    |
+| product_status_id   | integer    | null: false                    |
+| shipping_id         | integer    | null: false                    |
+| prefecture_id       | integer    | null: false                    |
+| shipping_day_id     | integer    | null: false                    |
+| price               | integer    | null: false                    |
+| user                | references | null: false, foreign_key: true |
 
 Association
-belongs_to :users_item
+- has_one :orders
+- belongs_to :user
 
 addressesテーブル
 
 | Column             | Type       | Options                           |
 | ------------------ | ---------- | --------------------------------- |
-| postalcode         | string     | null: false                       |
-| city_id            | integer    | null: false                       |
+| postal_code        | string     | null: false                       |
+| prefecture_id      | integer    | null: false                       |
 | city               | string     | null: false                       |
 | address            | string     | null: false                       |
-| buildingname       | string     |                                   |
-| phonenumber        | string     | null: false                       |
-| items              | references | null: false, foreign_key: true    |
+| building_name      | string     |                                   |
+| phone_number       | string     | null: false                       |
+| order              | references | null: false, foreign_key: true    |
 
 Association
 
-belongs_to :users_item
+belongs_to :order
 
