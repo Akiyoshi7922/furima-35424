@@ -25,7 +25,7 @@ ordersテーブル
 | item          | references | null: false, foreign_key: true |
 
 Association
-- has_one :addresses
+- has_one :address
 - belongs_to :user
 - belongs_to :item
 
@@ -45,7 +45,7 @@ Association
 | user                | references | null: false, foreign_key: true |
 
 Association
-- has_one :orders
+- has_one :order
 - belongs_to :user
 
 addressesテーブル
