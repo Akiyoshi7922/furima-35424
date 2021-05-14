@@ -9,5 +9,5 @@ FactoryBot.define do
     last_name_kana         {'ソリッド'}
     first_name_kana        {'スネーク'}
     birthday               {'1889-09-23'}
-  end # password_confirmation
+  end
 end

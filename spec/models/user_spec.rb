@@ -92,18 +92,5 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include "Birthday can't be blank"
     end
- end
+  end
 end
-# SQLと一致したカラム名の準備が必要！
-
-# describe "ユーザー新規登録" do
-
-# context '正常系' do
-
-# end
-
-# context '異常系' do
-#
-# end
-
-# end
