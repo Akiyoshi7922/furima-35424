@@ -52,7 +52,7 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
     end
-    it 'password:半角英数混合(全角では不可)' do
+    it 'password:半角英数混合(全角のみ)' do
       @user.password = 'あああああ'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
@@ -68,17 +68,11 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password"
     end
-    it "ユーザー本名は、名字と名前がそれぞれ必須であること" do
+    it "ユーザー本名は、全角（漢字・ひらがな・カタカナ）での入力が必須であること" do
       @user.last_name= ''
       @user.first_name= ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("Last name can't be blank", "First name can't be blank")
-    end
-    it "ユーザー本名は、全角（漢字・ひらがな・カタカナ）での入力が必須であること" do
-      @user.last_name= '1'
-      @user.first_name= 'a'
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Last name Last name can't be blankFirst name can't be blank", "First name Last name can't be blankFirst name can't be blank")
+      expect(@user.errors.full_messages).to include("First name Last name can't be blankFirst name can't be blank")
     end
     it "ユーザー本名のフリガナは、全角（カタカナ）での入力が必須であること" do
       @user.last_name_kana= ''
