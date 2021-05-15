@@ -38,9 +38,9 @@ RSpec.describe User, type: :model do
       expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
     it 'メールアドレスは、@を含む必要があること' do
-      @user.email = '@'
+      @user.email = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include ("Email is invalid")
+      expect(@user.errors.full_messages).to include ("Email can't be blank")
     end
     it 'password:半角英数混合(半角英語のみ)' do
       @user.password = 'aaaaaa'
@@ -49,6 +49,11 @@ RSpec.describe User, type: :model do
     end
     it 'password:半角英数混合(半角数字のみ)' do
       @user.password = '1111111'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+    end
+    it 'password:半角英数混合(全角では不可)' do
+      @user.password = 'あああああ'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
     end
@@ -75,13 +80,7 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name Last name can't be blankFirst name can't be blank", "First name Last name can't be blankFirst name can't be blank")
     end
-      it "ユーザー本名は、名字と名前がそれぞれ必須であること" do
-      @user.last_name_kana= ''
-      @user.first_name_kana= ''
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Last name kana can't be blank", "First name kana can't be blank")
-    end
-      it "ユーザー本名のフリガナは、全角（カタカナ）での入力が必須であること" do
+    it "ユーザー本名のフリガナは、全角（カタカナ）での入力が必須であること" do
       @user.last_name_kana= ''
       @user.first_name_kana= ''
       @user.valid?
