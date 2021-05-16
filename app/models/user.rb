@@ -12,12 +12,16 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nick_name
     validates :birthday
-    with_options format: { with: NAME_REGEX, message: "Last name can't be blank" "First name can't be blank" } do
+    with_options format: { with: NAME_REGEX, message: "can't be blank" } do
       validates :last_name
+    end
+    with_options format: { with: NAME_REGEX, message: "can't be blank" } do
       validates :first_name
     end
-    with_options format: { with: NAME_REGEX, message: "Last name kana can't be blank" "First name kana can't be blank" } do
+    with_options format: { with: NAME_REGEX, message: "can't be blank" } do
       validates :last_name_kana
+    end
+    with_options format: { with: NAME_REGEX, message: "can't be blank" } do
       validates :first_name_kana
     end
   end
