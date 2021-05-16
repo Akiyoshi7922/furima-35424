@@ -11,7 +11,13 @@ RSpec.describe User, type: :model do
     it 'passwordが6文字以上であれば登録できること' do
       expect(@user).to be_valid
     end
+    it 'nicknameとemail、passwordとpassword_confirmationが存在すれば登録できる' do
+      expect(@user).to be_valid
+    end
   end
+
+
+
 
   context '異常系' do
     it "nicknameが空だと登録できない" do
