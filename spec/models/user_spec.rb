@@ -57,6 +57,11 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
+    it 'password:passwordは５文字以下では登録できないこと' do
+      @user.password = 'ああああ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
     it "パスワードは、確認用を含めて2回入力すること" do
       @user.password_confirmation = ''
       @user.valid?
@@ -112,6 +117,11 @@ RSpec.describe User, type: :model do
       @user.first_name_kana= 'マリオ1'
       @user.valid?
       expect(@user.errors.full_messages).to include("First name kana can't be blank")
+    end
+    it "全角カタカナ以外の全角文字では登録できないこと" do
+      @user.last_name_kana= 'マリオ2'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana can't be blank")
     end
     it "生年月日が必須であること" do
       @user.birthday = ''
