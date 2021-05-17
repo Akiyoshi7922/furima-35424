@@ -26,11 +26,6 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include "Email can't be blank"
     end
-    it "passwordが空では登録できない" do
-      @user.password = ''
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Password can't be blank")
-    end
     it 'メールアドレスが一意性であること' do
       @user.save
       another_user = FactoryBot.build(:user, email: @user.email)
@@ -42,10 +37,15 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include ("Email is invalid")
     end
+    it "passwordが空では登録できない" do
+      @user.password = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
+    end
     it 'password:半角英数混合(半角英語のみ)' do
       @user.password = 'aaaaaa'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
     end
     it 'password:半角英数混合(半角数字のみ)' do
       @user.password = '1111111'
@@ -55,7 +55,7 @@ RSpec.describe User, type: :model do
     it 'password:半角英数混合(全角のみ)' do
       @user.password = 'あああああ'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
     end
     it 'password:passwordは５文字以下では登録できないこと' do
       @user.password = 'aa11'
@@ -71,7 +71,7 @@ RSpec.describe User, type: :model do
       @user.password = '123456'
       @user.password_confirmation = '1234567'
       @user.valid?
-      expect(@user.errors.full_messages).to include "Password Include both letters and numbers"
+      expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password"
     end
     it "ユーザー本名は、全角名字（漢字・ひらがな・カタカナ）での入力が必須であること" do
       @user.last_name= 'koko'
@@ -93,35 +93,35 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("First name can't be blank")
     end
-    it "ユーザー本名のフリガナは、全角名字（カタカナ）での入力が必須であること(半角)" do
-      @user.last_name_kana= 'horohoro1'
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Last name kana is invalid. Input full-width katakana characters.")
-    end
     it "ユーザー本名のフリガナは、全角名字（カタカナ）が空では登録できない" do
       @user.last_name_kana= ''
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name kana can't be blank")
     end
-    it "ユーザー本名のフリガナは、全角名前（カタカナ）での入力が必須であること(半角)" do
-      @user.first_name_kana= 'naruto1'
+    it "ユーザー本名のフリガナは、全角名字（カタカナ）での入力が必須であること(半角)" do
+      @user.last_name_kana= 'horohoro1'
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name kana is invalid. Input full-width katakana characters.")
+      expect(@user.errors.full_messages).to include("Last name kana is invalid. Input full-width katakana characters.")
     end
     it "ユーザー本名のフリガナは、全角名前（カタカナ）が空では登録できない" do
       @user.first_name_kana= ''
       @user.valid?
       expect(@user.errors.full_messages).to include("First name kana is invalid. Input full-width katakana characters.")
     end
-    it "全角カタカナ以外の全角文字では登録できないこと" do
-      @user.first_name_kana= 'まりお1'
+    it "ユーザー本名のフリガナは、全角名前（カタカナ）での入力が必須であること(半角)" do
+      @user.first_name_kana= 'naruto1'
       @user.valid?
       expect(@user.errors.full_messages).to include("First name kana is invalid. Input full-width katakana characters.")
     end
     it "全角カタカナ以外の全角文字では登録できないこと" do
-      @user.last_name_kana= 'まりお2'
+      @user.last_name_kana= 'まりお1'
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name kana is invalid. Input full-width katakana characters.")
+    end
+    it "全角カタカナ以外の全角文字では登録できないこと" do
+      @user.first_name_kana= 'まりお2'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid. Input full-width katakana characters.")
     end
     it "生年月日が必須であること" do
       @user.birthday = ''
