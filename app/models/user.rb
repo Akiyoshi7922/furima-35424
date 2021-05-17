@@ -14,14 +14,10 @@ class User < ApplicationRecord
     validates :birthday
     with_options format: { with: NAME_REGEX, message: "can't be blank" } do
       validates :last_name
-    end
-    with_options format: { with: NAME_REGEX, message: "can't be blank" } do
       validates :first_name
     end
     with_options format: { with: NAME_REGEX, message: "can't be blank" } do
       validates :last_name_kana
-    end
-    with_options format: { with: NAME_REGEX, message: "can't be blank" } do
       validates :first_name_kana
     end
   end
