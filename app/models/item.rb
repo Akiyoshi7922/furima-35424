@@ -8,7 +8,18 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee
   belongs_to :status
 
-  validates :name, presence: true
+  with_options presence: true do
+    validates :prodcut_name
+    validates :product_description
+    validates :image
+  end
 
-  validates :category_id, numericality: { other_than: 1 }
+  # validates_format_of :image, with: IMAGE_REGEX, message: "can't be blank"
+  # validates :prodcut_name, presence: true
+
+  validates :category_id, numericality:  { other_than: 1 }
+  validates :product_status_id, numericality: { other_than: 1 }
+  validates :shipping_id, numericality: { other_than: 1 }
+  validates :prefecture_id, numericality: { other_than: 1 }
+  validates :shipping_day_id, numericality: { other_than: 1 }
 end
