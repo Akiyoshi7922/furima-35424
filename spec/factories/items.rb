@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :item do
-    prodcut_name          {'ゼルダの伝説スカイウォードソード'}
+    product_name          {'ゼルダの伝説スカイウォードソード'}
     product_description   {'マスターソード創生の秘密が今明かされる！'}
     category_id           {'7'}
     product_status_id     {'7'}
