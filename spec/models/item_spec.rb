@@ -44,9 +44,9 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include "Product status is not a number"
     end
     it '商品の状態が1の場合は登録できない' do
-      @item.product_status_id = nil
+      @item.product_status_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include "Product status is not a number"
+      expect(@item.errors.full_messages).to include "Product status must be other than 1"
     end
     it '配送料の負担についての情報が必須であること' do
       @item.shipping_id = nil
@@ -54,9 +54,9 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include "Shipping is not a number"
     end
     it '配送料の負担が1の場合は登録できない' do
-      @item.shipping_id = nil
+      @item.shipping_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include "Shipping is not a number"
+      expect(@item.errors.full_messages).to include "Shipping must be other than 1"
     end
     it '発送元の地域についての情報が必須であること' do
       @item.prefecture_id = nil
@@ -64,9 +64,9 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include "Prefecture is not a number"
     end
     it '発送元の地域が1の場合は登録できない' do
-      @item.prefecture_id = nil
+      @item.prefecture_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include "Prefecture is not a number"
+      expect(@item.errors.full_messages).to include "Prefecture must be other than 1"
     end
     it '発送までの日数についての情報が必須であること' do
       @item.shipping_day_id = nil
