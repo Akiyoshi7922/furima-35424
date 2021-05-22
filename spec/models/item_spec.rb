@@ -50,7 +50,7 @@ RSpec.describe Item, type: :model do
     it '販売価格についての情報が必須であること' do
       @item.price = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include ""
+      expect(@item.errors.full_messages).to include "Shipping fee must exist"
     end
 
 
