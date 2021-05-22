@@ -83,11 +83,6 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include "Price can't be blank"
     end
-    it '販売価格は半角数字のみ' do
-      @item.price = nil
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Price Half-width number")
-    end
     it '値段が半角英数混合では登録できないこと' do
       @item.price = '5a'
       @item.valid?
