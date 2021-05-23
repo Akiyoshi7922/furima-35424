@@ -131,13 +131,13 @@
         <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
-          <%# <% if @user_item %> %>
+          <%# <% if @user_item %>
           <%# 商品が売れていればsold outを表示しましょう %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
           <%# //商品が売れていればsold outを表示しましょう %>
-          <% end %>
+          <%# <% end  %>
         </div>
         <div class='item-info'>
           <h3 class='item-name'>
@@ -153,7 +153,7 @@
         </div>
        <% end %>
       </li>
-       <%# <% end %>
+       <% end %>
     <% else %>
 
       <li class='list'>
