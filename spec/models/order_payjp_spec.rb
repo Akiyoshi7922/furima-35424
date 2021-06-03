@@ -34,9 +34,9 @@ RSpec.describe OrderPayjp, type: :model do
     end
 
     it "配送先の情報として、番地が必須であること" do
-      @order_payjp.house_number = ''
+      @order_payjp.address = ''
       @order_payjp.valid?
-      expect(@order_payjp.errors.full_messages).to include("House number can't be blank")
+      expect(@order_payjp.errors.full_messages).to include("Address can't be blank")
     end
 
     it "配送先の情報として、電話番号が必須であること" do
@@ -55,6 +55,12 @@ RSpec.describe OrderPayjp, type: :model do
       @order_payjp.phone_number = ''
       @order_payjp.valid?
       expect(@order_payjp.errors.full_messages).to include("Phone number Input only number")
+    end
+
+    it "tokenが空では登録できないこと" do
+      @order_payjp.token = ''
+      @order_payjp.valid?
+      expect(@order_payjp.errors.full_messages).to include("Token can't be blank")
     end
  end
 end
