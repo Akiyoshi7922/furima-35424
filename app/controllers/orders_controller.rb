@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   def create
 
     @order_payjp = OrderPayjp.new(order_params)
-  #  binding.pry
+
     if @order_payjp.valid?
        pay_item
        @order_payjp.save
