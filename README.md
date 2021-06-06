@@ -14,8 +14,8 @@
 | birthday           | date   | null: false               |
 
 Association
-- has_many :item
-- has_many :order
+- has_many :items
+- has_many :ordersPrefecture must be other than 1
 
 ordersテーブル
 

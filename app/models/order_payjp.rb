@@ -5,6 +5,7 @@ class OrderPayjp
   with_options presence: true do
   validates :city
   validates :address
+  validates :prefecture_id
   validates :phone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: "Input only number"}
   validates :postal_code, presence: true, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
   validates :token
