@@ -15,7 +15,7 @@
 
 Association
 - has_many :items
-- has_many :ordersPrefecture must be other than 1
+- has_many :orders
 
 ordersテーブル
 

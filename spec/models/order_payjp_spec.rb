@@ -65,6 +65,12 @@ RSpec.describe OrderPayjp, type: :model do
       expect(@order_payjp.errors.full_messages).to include("Phone number Input only number")
     end
 
+    it "電話番号は12桁以上では登録できないこと" do
+      @order_payjp.phone_number = '090123456789'
+      @order_payjp.valid?
+      expect(@order_payjp.errors.full_messages).to include("Phone number Input only number")
+    end
+
     it "電話番号が空の時は、保存不可なこと" do
       @order_payjp.phone_number = ''
       @order_payjp.valid?
